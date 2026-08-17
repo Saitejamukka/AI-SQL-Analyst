@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai_sql_analyst_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=production-super-secret-key-change-me
+    volumes:
+      - ./backend_data:/app/data
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai_sql_analyst_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always

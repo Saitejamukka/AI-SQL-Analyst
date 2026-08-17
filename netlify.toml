@@ -1,0 +1,16 @@
+[build]
+  base = "frontend"
+  publish = "dist"
+  command = "npm install && npm run build"
+
+# Redirect rules for Single Page Application (SPA) routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# API Proxy configuration for backend FastAPI service
+[[redirects]]
+  from = "/api/*"
+  to = "http://127.0.0.1:8000/api/:splat"
+  status = 200
